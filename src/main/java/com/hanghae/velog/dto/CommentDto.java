@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommentDto {
-    private String content;
-    private String userNick;
-    private Long postId;
+    private String comment;
+    private String userNanme;
+    private Long postingId;
 }

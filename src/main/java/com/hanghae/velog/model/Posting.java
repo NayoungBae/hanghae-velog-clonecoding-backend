@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -44,6 +45,10 @@ public class Posting {
     @OneToMany
     private List<Comment> comments;
 
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        return;
+    }
     // 메인페이지 게시글 전체 조회 생성자
     public Posting(PostingRequestDto requestDto, String userName) {
         this.title = requestDto.getTitle();
@@ -54,7 +59,6 @@ public class Posting {
     }
 
     // 개별 게시글 상세조회 페이지 생성자
-    public Posting()
 
 
 }

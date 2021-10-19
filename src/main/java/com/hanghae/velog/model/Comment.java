@@ -13,33 +13,27 @@ import javax.persistence.*;
 @Getter // get 함수를 일괄적으로 만들어줍니다.
 @NoArgsConstructor // 기본 생성자를 만들어줍니다.
 @Entity // DB 테이블 역할을 합니다.
-public class Comment {
+public class Comment extends Timestamped{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
     // 반드시 값을 가지도록 합니다.
     @Column(nullable = false)
-    private String userNick;
+    private String userName;
 
     @Column(nullable = false)
-    private String content;
+    private String comment;
 
     @Column(nullable = false)
-    private Long postId;
+    private Long postingId;
 
     public Comment(CommentDto reqDto) {
-        this.userNick = reqDto.getUserNick();
-        this.content = reqDto.getContent();
-        this.postId = reqDto.getPostId();
+        this.userName = reqDto.getUserNanme();
+        this.comment = reqDto.getComment();
+        this.postingId = reqDto.getPostingId();
     }
 
-    public Comment(CommentDto reqDto,Long userId,String content)
-    {
-        this.id = userId;
-        this.userNick = reqDto.getUserNick();
-        this.content = content;
-    }
     public void update(CommentDto reqDto) {
-        this.content = reqDto.getContent();
+        this.comment = reqDto.getComment();
     }
 }

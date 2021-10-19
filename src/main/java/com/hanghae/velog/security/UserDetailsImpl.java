@@ -17,6 +17,10 @@ public class UserDetailsImpl implements UserDetails {
         return null;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public String getPassword() {   //사용자 비밀번호
         return user.getPassword();
