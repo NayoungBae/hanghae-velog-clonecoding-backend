@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posting {
+public class Posting extends Timestamped {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -58,6 +58,13 @@ public class Posting {
         this.userName = userName;
     }
 
+    //게시글 수정
+    public void updatePosting(PostingRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.contentTag = requestDto.getContentTag();
+        this.imageFile = requestDto.getImageFile();
+    }
     // 개별 게시글 상세조회 페이지 생성자
 
 
