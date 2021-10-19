@@ -32,7 +32,7 @@ public class CommentService {
         Posting post = postRepository.findById(requestDto.getPostingId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다.")
         );
-        Comment comment = new Comment(requestDto);
+        Comment comment = new Comment(requestDto,userDetails.getUser().getUserId());
         commentRepository.save(comment);
         post.addComment(comment);
         postRepository.save(post);

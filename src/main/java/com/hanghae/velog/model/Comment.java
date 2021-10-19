@@ -27,8 +27,8 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private Long postingId;
 
-    public Comment(CommentDto reqDto) {
-        this.userName = reqDto.getUserNanme();
+    public Comment(CommentDto reqDto,String userName) {
+        this.userName = userName;
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
     }
