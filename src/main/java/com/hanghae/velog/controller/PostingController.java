@@ -48,7 +48,7 @@ public class PostingController {
 
 
     @PostMapping("/api/posting")
-    public Posting createPosting(
+    public MsgResponseDto createPosting(
             @RequestParam(value = "file",required = false) MultipartFile files,
             @RequestBody PostingRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -87,10 +87,14 @@ public class PostingController {
             requestDto.setImageFile(filename);
 
             Posting posts = postingService.createPosting(requestDto,username);
-            return posts;
+
+            MsgResponseDto msgResponseDto = new MsgResponseDto("게시글 작성에 성공되었습니다.");
+            return msgResponseDto;
         }
         catch (Exception e) {
-            return null;
+
+            MsgResponseDto msgResponseDto = new MsgResponseDto("에러 발생");
+            return msgResponseDto;
         }
 
     }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter // get 함수를 일괄적으로 만들어줍니다.
@@ -27,12 +28,20 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private Long postingId;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "postingId")
+//    private Posting post;
+
     public Comment(CommentDto reqDto,String userName) {
         this.userName = userName;
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
     }
-
+    public Comment(CommentDto reqDto) {
+        this.userName = reqDto.getUserName();
+        this.comment = reqDto.getComment();
+        this.postingId = reqDto.getPostingId();
+    }
     public void update(CommentDto reqDto) {
         this.comment = reqDto.getComment();
     }

@@ -25,14 +25,15 @@ public class CommentService {
 
 
     @Transactional
-    public void createComment(CommentDto requestDto, UserDetailsImpl userDetails) {
-        User user = userRepository.findByUserId(userDetails.getUser().getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
-        );
+    public void createComment(CommentDto requestDto) {
+//        User user = userRepository.findByUserName(userDetails.getUser().getUserName()).orElseThrow(
+//                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
+//        );
+
         Posting post = postRepository.findById(requestDto.getPostingId()).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다.")
         );
-        Comment comment = new Comment(requestDto,userDetails.getUser().getUserId());
+        Comment comment = new Comment(requestDto);
         commentRepository.save(comment);
         post.addComment(comment);
         postRepository.save(post);
