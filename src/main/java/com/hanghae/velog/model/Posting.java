@@ -7,8 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Posting extends Timestamped {
@@ -29,11 +33,11 @@ public class Posting extends Timestamped {
     @Column(nullable = false)
     private String contentTag;
 
-    @Column(nullable = false)
-    private Long dayBefore; // 게시글 등록 날짜(계산)
+//    @Column(nullable = false)
+//    private Long dayBefore; // 게시글 등록 날짜(계산)
 
-    @Column(nullable = false)
-    private Long commentCnt; // 게시글에 등록된 댓글 갯수
+//    @Column(nullable = false)
+//    private Long commentCnt; // 게시글에 등록된 댓글 갯수
 
     @Column(nullable = false)
     private String imageFile; // 메인페이지에서 보여질 게시글의 썸네일 이미지(유저가 게시글에 등록한 이미지)
@@ -41,7 +45,6 @@ public class Posting extends Timestamped {
 //    @Column(nullable = false)
 //    private String userImage; // 게시글 작성자의 프로필 사진
 
-    @Column(nullable = false)
     @OneToMany
     private List<Comment> comments;
 

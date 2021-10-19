@@ -33,7 +33,10 @@ public class CommentController {
             @RequestBody CommentDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
-        commentService.createComment(requestDto,userDetails);
+        if (userDetails != null){
+            return msg+"에러";
+        }
+        commentService.createComment(requestDto);
         return msg;
     }
 
