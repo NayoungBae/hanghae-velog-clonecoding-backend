@@ -41,14 +41,13 @@ public class PostingController {
             @RequestBody PostingRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-
         try {
             String filename = "basic.jpg";
             if (files != null) {
                 String origFilename = files.getOriginalFilename();
                 filename = new MD5Generator(origFilename).toString() + ".jpg";
                 /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-
+                System.out.println("test");
                 String savePath = System.getProperty("user.dir") + commonPath;
                 /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
                 //files.part.getcontententtype() 해서 이미지가 아니면 false처리해야함.

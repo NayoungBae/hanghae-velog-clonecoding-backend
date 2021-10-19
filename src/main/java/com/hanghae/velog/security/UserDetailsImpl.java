@@ -17,9 +17,7 @@ public class UserDetailsImpl implements UserDetails {
         return null;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user;}
 
     @Override
     public String getPassword() {   //사용자 비밀번호
@@ -27,9 +25,8 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
-    public String getUsername() {   //사용자 ID: email
-        return user.getUserName();
-    }
+    public String getUsername() {   return user.getUserName();}
+
 
     @Override
     public boolean isAccountNonExpired() {
