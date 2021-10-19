@@ -1,6 +1,7 @@
 package com.hanghae.velog.controller;
 
 import com.hanghae.velog.Util.MD5Generator;
+import com.hanghae.velog.dto.DetailResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.model.Posting;
@@ -36,6 +37,15 @@ public class PostingController {
         List<Posting> postingList = postingRepository.findAll();
         return postingList;
     }
+
+    // 게시글 상세조회
+    @GetMapping("/api/posting/{posting-ID}")
+    public DetailResponseDto getPostingDetail(@PathVariable("posting-ID") Long postingId) {
+        DetailResponseDto detailResponseDto = postingService.getPostingDetail(postingId);
+        return detailResponseDto;
+    }
+
+
 
     @PostMapping("/api/posting")
     public Posting createPosting(
@@ -85,27 +95,27 @@ public class PostingController {
 
     }
 
-    @PutMapping("/api/posting/{id}")
-    public MsgResponseDto updatePosts(@PathVariable Long id,@RequestBody(required = false) PostingRequestDto reqDto,@AuthenticationPrincipal UserDetailsImpl userDetails)
+    @PutMapping("/api/posting/{posting-ID}")
+    public MsgResponseDto updatePosts(@PathVariable("posting-ID") Long postingId,@RequestBody(required = false) PostingRequestDto reqDto,@AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         if(userDetails == null){
             throw new IllegalArgumentException("로그인 한 사용자만 수정 명령을 시도할 수 있습니다.");
         }
-        postingService.updatePosting(id,reqDto,userDetails);
+        postingService.updatePosting(postingId,reqDto,userDetails);
         MsgResponseDto msgResponseDto = new MsgResponseDto("수정 성공");
         return msgResponseDto;
     }
 
     //게시글 삭제
-    @DeleteMapping("/api/posting/{id}")
-    public MsgResponseDto deletePosts(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails)
+    @DeleteMapping("/api/posting/{posting-ID}")
+    public MsgResponseDto deletePosts(@PathVariable("posting-ID") Long postingId, @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         //삭제할때 댓글들 자동으로삭제하는지 확인해야함..
         if(userDetails == null){
             throw new IllegalArgumentException("로그인 한 사용자만 삭제 명령을 시도할 수 있습니다.");
         }
         //삭제할때 같이 저장된 이미지 경로 및 파일도 삭제
-        postingRepository.deleteById(id);
+        postingRepository.deleteById(postingId);
         MsgResponseDto msgResponseDto = new MsgResponseDto("삭제 성공");
         return msgResponseDto;
     }

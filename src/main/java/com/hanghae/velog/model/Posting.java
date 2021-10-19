@@ -29,8 +29,8 @@ public class Posting extends Timestamped {
     @Column(nullable = false)
     private String contentTag;
 
-    @Column(nullable = false)
-    private Long dayBefore; // 게시글 등록 날짜(계산)
+//    @Column(nullable = false)
+//    private Long dayBefore; // 게시글 등록 날짜(계산)
 
     @Column(nullable = false)
     private Long commentCnt; // 게시글에 등록된 댓글 갯수
