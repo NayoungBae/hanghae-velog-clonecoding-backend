@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 public class CommentController {
 
+    //서버업로드전
     private final CommentRepository commentRepository;
     private final CommentService commentService;
 
