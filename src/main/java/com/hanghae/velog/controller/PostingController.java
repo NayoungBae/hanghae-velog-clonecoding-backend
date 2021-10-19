@@ -1,6 +1,7 @@
 package com.hanghae.velog.controller;
 
 import com.hanghae.velog.Util.MD5Generator;
+import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class PostingController {
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
     public List<Posting> getPostings() {
-        List<Posting> postingList = postingRepository.findAllByOrderByCreatedAtDesc();
+        List<Posting> postingList = postingRepository.findAll();
         return postingList;
     }
 
@@ -47,7 +49,7 @@ public class PostingController {
                 String origFilename = files.getOriginalFilename();
                 filename = new MD5Generator(origFilename).toString() + ".jpg";
                 /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-                System.out.println("test");
+
                 String savePath = System.getProperty("user.dir") + commonPath;
                 /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
                 //files.part.getcontententtype() 해서 이미지가 아니면 false처리해야함.
@@ -68,18 +70,45 @@ public class PostingController {
                 username = "이게 반환되면 오류입니다";
             }
             if(userDetails != null){
-                username = userDetails.getUser().getUserId();
+                username = userDetails.getUser().getUserName();
             }
 
 
             requestDto.setImageFile(filename);
 
             Posting posts = postingService.createPosting(requestDto,username);
-            return null;
+            return posts;
         }
         catch (Exception e) {
             return null;
         }
 
     }
+
+    @PutMapping("/api/posting/{id}")
+    public MsgResponseDto updatePosts(@PathVariable Long id,@RequestBody(required = false) PostingRequestDto reqDto,@AuthenticationPrincipal UserDetailsImpl userDetails)
+    {
+        if(userDetails == null){
+            throw new IllegalArgumentException("로그인 한 사용자만 수정 명령을 시도할 수 있습니다.");
+        }
+        postingService.updatePosting(id,reqDto,userDetails);
+        MsgResponseDto msgResponseDto = new MsgResponseDto("수정 성공");
+        return msgResponseDto;
+    }
+
+    //게시글 삭제
+    @DeleteMapping("/api/posting/{id}")
+    public MsgResponseDto deletePosts(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails)
+    {
+        //삭제할때 댓글들 자동으로삭제하는지 확인해야함..
+        if(userDetails == null){
+            throw new IllegalArgumentException("로그인 한 사용자만 삭제 명령을 시도할 수 있습니다.");
+        }
+        //삭제할때 같이 저장된 이미지 경로 및 파일도 삭제
+        postingRepository.deleteById(id);
+        MsgResponseDto msgResponseDto = new MsgResponseDto("삭제 성공");
+        return msgResponseDto;
+    }
+
+
 }
