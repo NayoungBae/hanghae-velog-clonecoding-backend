@@ -24,7 +24,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {   //사용자 ID: email
-        return user.getUserId();
+        return user.getUserName();
     }
 
     @Override

@@ -3,7 +3,10 @@ package com.hanghae.velog.controller;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
+import com.hanghae.velog.security.UserDetailsImpl;
 import com.hanghae.velog.service.PostingService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 public class PostingController {
 
@@ -20,7 +24,7 @@ public class PostingController {
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
     public List<Posting> getPostings() {
-        List<Posting> postingList = postingRepository.();
+        List<Posting> postingList = postingRepository.findAllByOrderByCreatedAtDesc();
         return postingList;
     }
 

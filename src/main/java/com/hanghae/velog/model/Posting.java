@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Setter
 @Getter
 @NoArgsConstructor
 @Entity
@@ -26,10 +28,10 @@ public class Posting {
     private String content; // 게시글 내용
 
     @Column(nullable = false)
-    private String contentTag;
+    private String contentTag; // 게시글 단어 태그
 
     @Column(nullable = false)
-    private Long dayBefore; // 게시글 등록 날짜(계산)
+    private Long dayBefore; // 게시글 등록 날짜(계산) : 7일 전까지 '며칠 전', 7일 후부터는 생성날짜로 적기
 
     @Column(nullable = false)
     private Long commentCnt; // 게시글에 등록된 댓글 갯수
@@ -42,6 +44,7 @@ public class Posting {
 
     @Column(nullable = false)
     @OneToMany
+    @JoinColumn(name = "commentList")
     private List<Comment> comments;
 
     // 메인페이지 게시글 전체 조회 생성자
