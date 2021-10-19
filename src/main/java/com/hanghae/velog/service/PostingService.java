@@ -1,6 +1,8 @@
 package com.hanghae.velog.service;
 
+import com.hanghae.velog.dto.DetailResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
+import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.model.Timestamped;
 import com.hanghae.velog.repository.PostingRepository;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -45,4 +50,36 @@ public class PostingService {
         }
 
     }
+
+    public DetailResponseDto getPostingDetail(Long postingId) {
+        Posting posting = postingRepository.findByPostingId(postingId);
+
+        String title = posting.getTitle();
+        String content = posting.getContent();
+        String imageFile = posting.getImageFile();
+        String modifiedAt = posting.getModifiedAt().toString();
+        List<Comment> comments = posting.getComments();
+
+        DetailResponseDto detailResponseDto = new DetailResponseDto(
+                postingId, title, content, imageFile, modifiedAt, comments
+        );
+
+        return detailResponseDto;
+    }
+
+
+//    public Posting getDayBefore(Posting posting) {
+//        LocalDate now = LocalDate.now(); // 2021-10-19
+//        int year = now.getYear(); // 2021
+//        int monthValue = now.getMonthValue(); // 10
+//        int dayofMonth = now.getDayOfMonth(); // 19
+//
+//        LocalDateTime CreatedAt = posting.getCreatedAt();
+//
+//        if ()
+//
+//        //DayBefore 계산
+//        int DayBefore
+//    }
+
 }
