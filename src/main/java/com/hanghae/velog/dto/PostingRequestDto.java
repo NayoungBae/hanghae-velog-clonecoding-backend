@@ -1,7 +1,9 @@
 package com.hanghae.velog.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public class PostingRequestDto {
     private String title; // 제목
