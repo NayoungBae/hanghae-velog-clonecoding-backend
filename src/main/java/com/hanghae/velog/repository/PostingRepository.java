@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PostingRepository extends JpaRepository<Posting, Long> {
-//    List<Posting> findAllByOrderByCreatedAtDesc();
+    List<Posting> findAllByOrderByCreatedAtDesc();
         Posting findByPostingId(Long postingId);
+
 }
