@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface PostingRepository extends JpaRepository<Posting, Long> {
 //    List<Posting> findAllByOrderByCreatedAtDesc();
-      Posting findByPostingId(Long postingId);
+    Posting findByPostingId(Long postingId);
+    List<Posting> findByUserName(String userName);
 }
