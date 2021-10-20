@@ -1,9 +1,15 @@
 package com.hanghae.velog.dto;
 
-import com.hanghae.velog.model.Posting;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class PostingResponseDto {
     private Long postingId;
     private String userName;
@@ -11,6 +17,7 @@ public class PostingResponseDto {
     private String content;
     private String imageFile;
     private String dayBefore;
+    private int commentCnt;
 }
 
 //postingId": "1",

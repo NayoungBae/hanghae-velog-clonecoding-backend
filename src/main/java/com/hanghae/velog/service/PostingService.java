@@ -1,9 +1,6 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.dto.DetailResponseDto;
-import com.hanghae.velog.dto.GetMyPostsResponseDto;
-import com.hanghae.velog.dto.MyPostingResponseDto;
-import com.hanghae.velog.dto.PostingRequestDto;
+import com.hanghae.velog.dto.*;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
@@ -74,27 +71,38 @@ public class PostingService {
     }
 
     // 게시글 전체조회 메소드
-    public void getPostings(Posting posting) throws ParseException {
+    public List<PostingResponseDto> getPostings() throws ParseException {
         List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
+
+        List<PostingResponseDto> postingList = new ArrayList<>();
+
         for(int i=0; i<postings.size(); i++) {
-            Posting posting1 = postings.get(0);
+            Posting post = postings.get(i);
+
+            Long postingId = post.getPostingId();
+            String userName = post.getUserName();
+            String title = post.getTitle();
+            String content = post.getContent();
+            String imageFile = post.getImageFile();
+            String dayBefore = getDayBefore(post);
+            int commentCnt = post.getComments().size();
+
+            PostingResponseDto responseDto =
+                    new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
+            postingList.add(responseDto);
         }
 
-//        for (int i=0; i<postings.size(); i++) {
-//            postings.add(4,getDayBefore(posting));
-//        }
-
-//        PostingResponseDto postingResponseDto = new PostingResponseDto(posting)
+        return postingList;
     }
 
 
     public String getDayBefore(Posting posting) throws ParseException {
 
-        String now = LocalDate.now().toString();
+        String now = LocalDateTime.now().toString();
         String createdAt = posting.getCreatedAt().toString();
 
-        Date format1 = new SimpleDateFormat("yyyy/MM/dd").parse(now);
-        Date format2 = new SimpleDateFormat("yyyy/MM/dd").parse(createdAt);
+        Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+        Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(createdAt);
 
         // date.getTime() : Date를 밀리세컨드로 변환. 1초 = 1000밀리초
         Long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이
@@ -112,15 +120,15 @@ public class PostingService {
         String dayBefore = "";
 
         if(diffSec < 60) {
-            return "diffSec.toString()";
+            dayBefore = diffSec.toString();
         } else if(diffSec >= 60 && diffMin < 60) {
-            return "diffMin.toString()";
+            dayBefore = diffMin.toString();
         } else if(diffMin >= 60 && diffHour < 24) {
-            return "diffHour.toString()";
+            dayBefore = diffHour.toString();
         } else if(diffHour >= 24 && diffDays < 7) {
-            return "diffDays.toString()";
+            dayBefore = diffDays.toString();
         } else if (diffDays > 7) {
-            return "format2.toString();";
+            dayBefore = format2.toString();
         }
         return dayBefore;
     }

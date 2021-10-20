@@ -36,14 +36,11 @@ public class PostingController {
 
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
-    public void getPostings(Posting posting) throws ParseException {
-        List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
-        for(int i=0; i<postings.size(); i++) {
-            System.out.println(postings);
-            Posting posting1 = postings.get(0);
-            System.out.println(posting1);
+    public List<PostingResponseDto> getPosts() throws ParseException {
+        List<PostingResponseDto> allpostings = postingService.getPostings();
+        return allpostings;
         }
-    }
+
 
     // 게시글 상세조회
     @GetMapping("/api/posting/{posting-ID}")
