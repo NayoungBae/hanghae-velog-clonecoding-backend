@@ -87,7 +87,7 @@
 <body>
 <form action="/user/login" method="post">
     <div class="login-id-label">아이디</div>
-    <input type="text" name="username" class="login-input-box">
+    <input type="text" name="userId" class="login-input-box">
 
     <div class="login-id-label">비밀번호</div>
     <input type="password" name="password" class="login-input-box">
@@ -95,19 +95,12 @@
     <button>로그인</button>
 </form>
 
-<form action="/test">
-    <button >로그인</button>
-</form>
-
-<form action="/dbSet">
+<form action="/api/test">
     <button >데이터베이스</button>
 </form>
-<form action="/dbSet2">
+<form action="/api/test2">
     <button >데이터베이스2</button>
 </form>
-<button onclick = "view(0)">카테고리0번꺼 불러오기</button>
-<button onclick = "view(1)">카테고리1번꺼 불러오기</button>
-<button onclick = "view(2)">카테고리2번꺼 불러오기</button>
 <button onclick = "showPosts()">전체 불러오기</button>
 <br>
 <table class="table">
@@ -126,7 +119,7 @@
 <br>
 <br>
 <br>
-<form action="/api/post" method="post" enctype="multipart/form-data">
+<form action="/api/posting" method="post" enctype="multipart/form-data">
     <div class="form-group row">
         <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
         <div class="col-sm-10">
