@@ -8,12 +8,16 @@ import com.hanghae.velog.dto.SignupRequestDto;
 import com.hanghae.velog.security.JwtTokenProvider;
 import com.hanghae.velog.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @RequiredArgsConstructor
-@RestController
+@RestController     //return값이 html 파일이름이 아닌 이상 바꾸면 안됩니다
 public class UserController {
 
     private final UserService userService;
@@ -36,7 +40,8 @@ public class UserController {
 
     //로그인
     @PostMapping("/user/login")
-    public LoginResponseDto login(@RequestBody LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(@RequestBody LoginRequestDto loginRequestDto,
+                                  HttpServletResponse response) {
         String userId = "";
         String token = "";
         LoginResponseDto loginResponseDto = null;
@@ -47,7 +52,18 @@ public class UserController {
             String userName = user.getUserName();   //사용자 닉네임을 토큰에 넣음
             token = jwtTokenProvider.createToken(userName);
 
+            //response할 아이디 값을 변수에 저장
             userId = user.getUserId();
+
+            //header에 토큰 세팅
+            response.setHeader("X-AUTH-TOKEN", token);
+
+            //header에 cookie 저장
+            Cookie cookie = new Cookie("X-AUTH-TOKEN", token);
+            cookie.setPath("/");
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            response.addCookie(cookie);
 
         } catch(Exception e) {
             System.out.println("error: " + e.getMessage());

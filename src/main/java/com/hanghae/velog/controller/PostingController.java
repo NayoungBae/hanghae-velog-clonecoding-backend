@@ -2,6 +2,7 @@ package com.hanghae.velog.controller;
 
 import com.hanghae.velog.Util.MD5Generator;
 import com.hanghae.velog.dto.DetailResponseDto;
+import com.hanghae.velog.dto.GetMyPostsResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.dto.PostingResponseDto;
@@ -38,7 +39,9 @@ public class PostingController {
     public void getPostings(Posting posting) throws ParseException {
         List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
         for(int i=0; i<postings.size(); i++) {
+            System.out.println(postings);
             Posting posting1 = postings.get(0);
+            System.out.println(posting1);
         }
     }
 
@@ -49,10 +52,9 @@ public class PostingController {
         return detailResponseDto;
     }
 
-
-
+    //게시글 생성
     @PostMapping("/api/posting")
-    public Posting createPosting(
+    public MsgResponseDto createPosting(
             @RequestParam(value = "file",required = false) MultipartFile files,
             @RequestBody PostingRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -91,14 +93,19 @@ public class PostingController {
             requestDto.setImageFile(filename);
 
             Posting posts = postingService.createPosting(requestDto,username);
-            return posts;
+
+            MsgResponseDto msgResponseDto = new MsgResponseDto("게시글 작성에 성공되었습니다.");
+            return msgResponseDto;
         }
         catch (Exception e) {
-            return null;
+
+            MsgResponseDto msgResponseDto = new MsgResponseDto("에러 발생");
+            return msgResponseDto;
         }
 
     }
 
+    //게시글 수정
     @PutMapping("/api/posting/{posting-ID}")
     public MsgResponseDto updatePosts(@PathVariable("posting-ID") Long postingId,@RequestBody(required = false) PostingRequestDto reqDto,@AuthenticationPrincipal UserDetailsImpl userDetails)
     {
@@ -124,5 +131,11 @@ public class PostingController {
         return msgResponseDto;
     }
 
+    //내가 작성한 게시글 목록 조회
+    @GetMapping("/api/mypage")
+    public GetMyPostsResponseDto getMyPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        GetMyPostsResponseDto postingList = postingService.getMyPosts(userDetails);
+        return postingList;
+    }
 
 }

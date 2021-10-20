@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 public class CommentController {
 
+    //서버업로드전
     private final CommentRepository commentRepository;
     private final CommentService commentService;
 
@@ -33,7 +34,10 @@ public class CommentController {
             @RequestBody CommentDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
-        commentService.createComment(requestDto,userDetails);
+        if (userDetails != null){
+            return msg+"에러";
+        }
+        commentService.createComment(requestDto);
         return msg;
     }
 

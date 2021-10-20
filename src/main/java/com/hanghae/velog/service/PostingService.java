@@ -1,8 +1,9 @@
 package com.hanghae.velog.service;
 
 import com.hanghae.velog.dto.DetailResponseDto;
+import com.hanghae.velog.dto.GetMyPostsResponseDto;
+import com.hanghae.velog.dto.MyPostingResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
-import com.hanghae.velog.dto.PostingResponseDto;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
@@ -15,6 +16,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -119,6 +123,44 @@ public class PostingService {
             return "format2.toString();";
         }
         return dayBefore;
+    }
+
+    //내가 작성한 게시글 목록 조회
+    public GetMyPostsResponseDto getMyPosts(UserDetailsImpl userDetails) {
+        String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
+
+        List<Posting> posts = postingRepository.findByUserName(loginedUserName);     //로그인한 사용자가 작성한 글 목록 조회
+
+        List<MyPostingResponseDto> data = new ArrayList<>();
+
+        for(int i=0; i<posts.size(); i++) {
+            Posting post = posts.get(i);
+
+            Long postingId = post.getPostingId();
+            String thumbNail = post.getImageFile();
+            String title = post.getTitle();
+            String content = post.getContent();
+
+            //날짜 차이 계산
+            LocalDate currentDate = LocalDateTime.now().toLocalDate();
+            LocalDate createdAt = post.getCreatedAt().toLocalDate();
+            Period period = Period.between(createdAt, currentDate);
+
+            String dayBefore = Long.toString(period.getDays()) + "일 전";
+
+            int commentCnt = post.getComments().size();
+            //String userImage =
+            String userName = post.getUserName();
+
+            MyPostingResponseDto posting =
+                    new MyPostingResponseDto(postingId, thumbNail, title, content,
+                            dayBefore, commentCnt, userName);
+            data.add(posting);
+        }
+
+        GetMyPostsResponseDto getMyPostsResponseDto = new GetMyPostsResponseDto(data);
+
+        return getMyPostsResponseDto;
     }
 
 }

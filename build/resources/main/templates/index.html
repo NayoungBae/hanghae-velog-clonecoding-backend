@@ -87,7 +87,7 @@
 <body>
 <form action="/user/login" method="post">
     <div class="login-id-label">아이디</div>
-    <input type="text" name="username" class="login-input-box">
+    <input type="text" name="userId" class="login-input-box">
 
     <div class="login-id-label">비밀번호</div>
     <input type="password" name="password" class="login-input-box">
@@ -99,10 +99,10 @@
     <button >로그인</button>
 </form>
 
-<form action="/dbSet">
+<form action="/api/test">
     <button >데이터베이스</button>
 </form>
-<form action="/dbSet2">
+<form action="/api/test2">
     <button >데이터베이스2</button>
 </form>
 <button onclick = "view(0)">카테고리0번꺼 불러오기</button>

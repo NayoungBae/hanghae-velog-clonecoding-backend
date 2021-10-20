@@ -18,21 +18,19 @@ import java.util.List;
 @Service
 public class CommentService {
 
-    private UserRepository userRepository;
-    private CommentRepository commentRepository;
-    private PostingRepository postRepository;
+    private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final PostingRepository postRepository;
 
 
 
     @Transactional
-    public void createComment(CommentDto requestDto, UserDetailsImpl userDetails) {
-        User user = userRepository.findByUserId(userDetails.getUser().getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
-        );
-        Posting post = postRepository.findById(requestDto.getPostingId()).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다.")
-        );
-        Comment comment = new Comment(requestDto,userDetails.getUser().getUserId());
+    public void createComment(CommentDto requestDto) {
+//        User user = userRepository.findByUserName(userDetails.getUser().getUserName()).orElseThrow(
+//                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
+//        );
+        Comment comment = new Comment(requestDto);
+        Posting post = postRepository.findByPostingId(requestDto.getPostingId());
         commentRepository.save(comment);
         post.addComment(comment);
         postRepository.save(post);
