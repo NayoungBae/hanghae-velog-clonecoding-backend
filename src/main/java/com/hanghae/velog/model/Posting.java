@@ -44,6 +44,8 @@ public class Posting extends Timestamped {
 
 //    @Column(nullable = false)
 //    private String userImage; // 게시글 작성자의 프로필 사진
+    @Column
+    private String imageUrl;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
@@ -67,6 +69,7 @@ public class Posting extends Timestamped {
         this.content = requestDto.getContent();
 //        this.contentTag = requestDto.getContentTag();
         this.filePath = requestDto.getFilePath();
+        this.imageUrl = requestDto.getImageUrl(); // 추가됨
     }
     // 개별 게시글 상세조회 페이지 생성자
 
