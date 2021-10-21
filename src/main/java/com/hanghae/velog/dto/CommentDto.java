@@ -1,6 +1,7 @@
 package com.hanghae.velog.dto;
 
 
+import com.hanghae.velog.model.Posting;
 import lombok.Getter;
 import lombok.Setter;
 
