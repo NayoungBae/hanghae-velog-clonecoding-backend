@@ -11,13 +11,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class PostingResponseDto {
-    private Long postingId;
-    private String userName;
-    private String title;
-    private String content;
-    private String imageFile;
-    private String dayBefore;
-    private int commentCnt;
+    private Long postingId;     //게시글 번호
+    private String userName;    //닉네임
+    private String title;       //제목
+    private String content;     //내용
+    private String imageFile;   //게시글 이미지
+    private String dayBefore;   //n일 전
+    private int commentCnt;     //댓글 개수
+    //private userImage;          //사용자 이미지
 }
 
 //postingId": "1",

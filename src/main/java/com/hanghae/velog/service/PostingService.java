@@ -10,11 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,14 +92,32 @@ public class PostingService {
         return postingList;
     }
 
+    //내가 작성한 게시글 목록 조회
+    public PostsResponseDto getMyPosts(UserDetailsImpl userDetails) throws ParseException {
+        String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
 
+        PostsResponseDto postsResponseDto = getPosts(loginedUserName);
+
+        return postsResponseDto;
+    }
+
+    //특정 유저 게시글 조회
+    public PostsResponseDto getUserPosts(String currentUserName) throws ParseException {
+
+        PostsResponseDto postsResponseDto = getPosts(currentUserName);
+
+        return postsResponseDto;
+    }
+
+    //게시한 날짜부터 얼마나 되었는 지 계산
     public String getDayBefore(Posting posting) throws ParseException {
 
-        String now = LocalDateTime.now().toString();
-        String createdAt = posting.getCreatedAt().toString();
+        //LocalDateTime -> Date으로 변환
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime createdAt = posting.getCreatedAt();
 
-        Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
-        Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(createdAt);
+        Date format1 = java.sql.Timestamp.valueOf(now);
+        Date format2 = java.sql.Timestamp.valueOf(createdAt);
 
         // date.getTime() : Date를 밀리세컨드로 변환. 1초 = 1000밀리초
         Long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이
@@ -120,56 +135,50 @@ public class PostingService {
         String dayBefore = "";
 
         if(diffSec < 60) {
-            dayBefore = diffSec.toString();
+            String secstr = diffSec.toString();
+            dayBefore = secstr + "초 전";
         } else if(diffSec >= 60 && diffMin < 60) {
-            dayBefore = diffMin.toString();
+            String minstr = diffMin.toString();
+            dayBefore = minstr + "분 전";
         } else if(diffMin >= 60 && diffHour < 24) {
-            dayBefore = diffHour.toString();
+            String hourstr = diffHour.toString();
+            dayBefore = hourstr + "시 전";
         } else if(diffHour >= 24 && diffDays < 7) {
-            dayBefore = diffDays.toString();
+            String daystr = diffDays.toString();
+            dayBefore = daystr + "일 전";
         } else if (diffDays > 7) {
             dayBefore = format2.toString();
         }
         return dayBefore;
     }
 
-    //내가 작성한 게시글 목록 조회
-    public GetMyPostsResponseDto getMyPosts(UserDetailsImpl userDetails) throws ParseException {
-        String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
+    //특정 닉네임을 가진 계정이 쓴 게시글 조회
+    private PostsResponseDto getPosts(String currentUserName) throws ParseException {
+        List<Posting> posts = postingRepository.findByUserNameOrderByCreatedAtDesc(currentUserName);
 
-        //로그인한 사용자가 작성한 글 목록 조회
-        List<Posting> posts = postingRepository.findByUserNameOrderByCreatedAtDesc(loginedUserName);
+        List<PostingResponseDto> data = new ArrayList<>();
 
-        List<MyPostingResponseDto> data = new ArrayList<>();
-
-        for(int i=0; i<posts.size(); i++) {
+        for (int i = 0; i < posts.size(); i++) {
             Posting post = posts.get(i);
 
             Long postingId = post.getPostingId();
-            String thumbNail = post.getImageFile();
+            String imageFile = post.getImageFile();
             String title = post.getTitle();
             String content = post.getContent();
-
-            //날짜 차이 계산
-//            LocalDate currentDate = LocalDateTime.now().toLocalDate();
-//            LocalDate createdAt = post.getCreatedAt().toLocalDate();
-//            Period period = Period.between(createdAt, currentDate);
-//            String dayBefore = Long.toString(period.getDays()) + "일 전";
             String dayBefore = getDayBefore(post);
-
             int commentCnt = post.getComments().size();
             //String userImage =
             String userName = post.getUserName();
 
-            MyPostingResponseDto posting =
-                    new MyPostingResponseDto(postingId, thumbNail, title, content,
-                            dayBefore, commentCnt, userName);
-            data.add(posting);
+            PostingResponseDto responseDto =
+                    new PostingResponseDto(postingId, userName, title, content,
+                                           imageFile, dayBefore, commentCnt);
+            data.add(responseDto);
         }
 
-        GetMyPostsResponseDto getMyPostsResponseDto = new GetMyPostsResponseDto(data);
+        PostsResponseDto postsResponseDto = new PostsResponseDto(data);
 
-        return getMyPostsResponseDto;
+        return postsResponseDto;
     }
 
 }

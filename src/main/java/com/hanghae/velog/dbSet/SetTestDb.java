@@ -99,7 +99,7 @@ public class SetTestDb {
         reqdto9.setContent("내용");
         reqdto9.setContentTag("테스트");
         reqdto9.setImageFile("/images/basic.jpg");
-        postService.createPosting(reqdto9,"bbb");
+        postService.createPosting(reqdto9,"aaa");
         PostingRequestDto reqdto10 = new PostingRequestDto();
         reqdto10.setTitle("제목10");
         reqdto10.setContent("내용");
