@@ -16,8 +16,10 @@ public class PostingResponseDto {
     private String title;       //제목
     private String content;     //내용
     private String imageFile;   //게시글 이미지
+    private String imageUrl;
     private String dayBefore;   //n일 전
     private int commentCnt;     //댓글 개수
+
     //private userImage;          //사용자 이미지
 }
 

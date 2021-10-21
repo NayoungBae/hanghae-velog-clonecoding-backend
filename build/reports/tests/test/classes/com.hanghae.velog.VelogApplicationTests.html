@@ -41,7 +41,11 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
+<<<<<<< HEAD
 <div class="counter">0.006s</div>
+=======
+<div class="counter">0.100s</div>
+>>>>>>> c384d818b0f188143f53250588335e0b02f50571
 <p>duration</p>
 </div>
 </td>
@@ -213,15 +217,22 @@ Caused by: org.hibernate.AnnotationException: mappedBy reference an unknown targ
 </tr>
 </thead>
 <tr>
+<<<<<<< HEAD
 <td class="failures">contextLoads()</td>
 <td class="failures">0.006s</td>
 <td class="failures">failed</td>
+=======
+<td class="success">contextLoads()</td>
+<td class="success">0.100s</td>
+<td class="success">passed</td>
+>>>>>>> c384d818b0f188143f53250588335e0b02f50571
 </tr>
 </table>
 </div>
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
+<<<<<<< HEAD
 <pre>18:53:29.089 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
 18:53:29.124 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
 18:53:29.206 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.hanghae.velog.VelogApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
@@ -238,6 +249,24 @@ Caused by: org.hibernate.AnnotationException: mappedBy reference an unknown targ
 18:53:29.891 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1603cd68, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@9ebe38b, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4b23c30a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@38089a5a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30e868be, org.springframework.test.context.support.DirtiesContextTestExecutionListener@66c92293, org.springframework.test.context.transaction.TransactionalTestExecutionListener@332796d3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4f0100a7, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@3cdf2c61, org.springframework.test.context.event.EventPublishingTestExecutionListener@13ad5cd3, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@1c33c17b, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5bf0fe62, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1e097d59, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@673be18f, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6581dc0a, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@39de3d36, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6ce86ce1]
 18:53:29.898 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@32c726ee testClass = VelogApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@22f31dec testClass = VelogApplicationTests, locations = '{}', classes = '{class com.hanghae.velog.VelogApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1ca3b418, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@15043a2f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@28261e8e, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@35dab4eb, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@402c4085, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@d4342c2], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
 18:53:29.982 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+=======
+<pre>18:52:16.486 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+18:52:16.496 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+18:52:16.521 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.hanghae.velog.VelogApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+18:52:16.532 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.hanghae.velog.VelogApplicationTests], using SpringBootContextLoader
+18:52:16.536 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.hanghae.velog.VelogApplicationTests]: class path resource [com/hanghae/velog/VelogApplicationTests-context.xml] does not exist
+18:52:16.536 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.hanghae.velog.VelogApplicationTests]: class path resource [com/hanghae/velog/VelogApplicationTestsContext.groovy] does not exist
+18:52:16.536 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.hanghae.velog.VelogApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+18:52:16.537 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.hanghae.velog.VelogApplicationTests]: VelogApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:52:16.574 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.hanghae.velog.VelogApplicationTests]
+18:52:16.620 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\7\Documents\GitHub\hanghae-velog-clonecoding-backend\build\classes\java\main\com\hanghae\velog\VelogApplication.class]
+18:52:16.621 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.hanghae.velog.VelogApplication for test class com.hanghae.velog.VelogApplicationTests
+18:52:16.697 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.hanghae.velog.VelogApplicationTests]: using defaults.
+18:52:16.698 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+18:52:16.722 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3113a37, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@213e3629, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4e9658b5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2a7b6f69, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@20312893, org.springframework.test.context.support.DirtiesContextTestExecutionListener@70eecdc2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@c41709a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7db0565c, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@54ec8cc9, org.springframework.test.context.event.EventPublishingTestExecutionListener@52eacb4b, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@5528a42c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2a551a63, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1a6f5124, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1edb61b1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@ec2bf82, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@cc62a3b, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6cc0bcf6]
+18:52:16.724 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@433ffad1 testClass = VelogApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@1fc793c2 testClass = VelogApplicationTests, locations = '{}', classes = '{class com.hanghae.velog.VelogApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@55342f40, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@3f0846c6, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@45e37a7e, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5a7005d, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@7b8233cd, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@18ece7f4], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+18:52:16.750 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+>>>>>>> c384d818b0f188143f53250588335e0b02f50571
 
 
 
@@ -265,6 +294,7 @@ V::::::V           V::::::V               l:::::l                               
                                                                        ggg::::::ggg
                                                                           gggggg
 
+<<<<<<< HEAD
 2021-10-21 18:53:30.673  INFO 29116 --- [    Test worker] com.hanghae.velog.VelogApplicationTests  : Starting VelogApplicationTests using Java 1.8.0_302 on DESKTOP-NE0TDM9 with PID 29116 (started by ksw04 in C:\Users\ksw04\IdeaProjects\hanghae-velog-clonecoding-backend)
 2021-10-21 18:53:30.689  INFO 29116 --- [    Test worker] com.hanghae.velog.VelogApplicationTests  : No active profile set, falling back to default profiles: default
 2021-10-21 18:53:33.191  INFO 29116 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
@@ -529,6 +559,25 @@ Caused by: org.hibernate.AnnotationException: mappedBy reference an unknown targ
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.10.jar:5.3.10]
 	... 100 common frames omitted
 
+=======
+2021-10-21 18:52:16.964  INFO 15864 --- [    Test worker] com.hanghae.velog.VelogApplicationTests  : Starting VelogApplicationTests using Java 11.0.12 on DESKTOP-RCNTD61 with PID 15864 (started by 7 in C:\Users\7\Documents\GitHub\hanghae-velog-clonecoding-backend)
+2021-10-21 18:52:16.967  INFO 15864 --- [    Test worker] com.hanghae.velog.VelogApplicationTests  : No active profile set, falling back to default profiles: default
+2021-10-21 18:52:17.605  INFO 15864 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-10-21 18:52:17.680  INFO 15864 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 4 JPA repository interfaces.
+2021-10-21 18:52:18.189  INFO 15864 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-10-21 18:52:18.361  INFO 15864 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-10-21 18:52:18.426  INFO 15864 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-10-21 18:52:18.477  INFO 15864 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2021-10-21 18:52:18.625  INFO 15864 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-10-21 18:52:18.767  INFO 15864 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-10-21 18:52:19.390  INFO 15864 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-10-21 18:52:19.398  INFO 15864 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-10-21 18:52:19.886  WARN 15864 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-21 18:52:20.146  INFO 15864 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@493250cf, org.springframework.security.web.context.SecurityContextPersistenceFilter@106f2425, org.springframework.security.web.header.HeaderWriterFilter@47400608, org.springframework.security.web.authentication.logout.LogoutFilter@6c3884f5, com.hanghae.velog.security.JwtAuthenticationFilter@24888d8b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7bbe852a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3113595e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@750b200b, org.springframework.security.web.session.SessionManagementFilter@84e43fb, org.springframework.security.web.access.ExceptionTranslationFilter@5a88849, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@45482f82]
+2021-10-21 18:52:20.560  INFO 15864 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:springcoredb'
+2021-10-21 18:52:20.620  INFO 15864 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-10-21 18:52:20.887  INFO 15864 --- [    Test worker] com.hanghae.velog.VelogApplicationTests  : Started VelogApplicationTests in 4.131 seconds (JVM running for 5.12)
+>>>>>>> c384d818b0f188143f53250588335e0b02f50571
 </pre>
 </span>
 </div>
@@ -540,7 +589,11 @@ Caused by: org.hibernate.AnnotationException: mappedBy reference an unknown targ
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
+<<<<<<< HEAD
 <a href="http://www.gradle.org">Gradle 7.2</a> at 2021. 10. 21 오후 6:53:41</p>
+=======
+<a href="http://www.gradle.org">Gradle 7.2</a> at 2021. 10. 21. 오후 6:52:21</p>
+>>>>>>> c384d818b0f188143f53250588335e0b02f50571
 </div>
 </div>
 </body>

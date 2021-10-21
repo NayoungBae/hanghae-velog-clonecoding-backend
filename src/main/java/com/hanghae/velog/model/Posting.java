@@ -42,10 +42,13 @@ public class Posting extends Timestamped {
     @Column(nullable = false)
     private String imageFile; // 메인페이지에서 보여질 게시글의 썸네일 이미지(유저가 게시글에 등록한 이미지)
 
+    @Column
+    private String imageUrl; // 추가됨
+
 //    @Column(nullable = false)
 //    private String userImage; // 게시글 작성자의 프로필 사진
 
-    @OneToMany(mappedBy = "post",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public void addComment(Comment comment) {
@@ -59,6 +62,7 @@ public class Posting extends Timestamped {
 //        this.contentTag = requestDto.getContentTag();
         this.imageFile = requestDto.getImageFile();
         this.userName = userName;
+        this.imageUrl = requestDto.getImageUrl(); // 추가됨
     }
 
     //게시글 수정

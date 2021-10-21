@@ -84,11 +84,12 @@ public class PostingService {
             String title = post.getTitle();
             String content = post.getContent();
             String imageFile = post.getImageFile();
+            String imageUrl = post.getImageUrl();
             String dayBefore = getDayBefore(post);
             int commentCnt = post.getComments().size();
 
             PostingResponseDto responseDto =
-                    new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
+                    new PostingResponseDto(postingId, userName, title, content, imageFile, imageUrl, dayBefore, commentCnt);
             data.add(responseDto);
         }
 
@@ -172,13 +173,14 @@ public class PostingService {
             String title = post.getTitle();
             String content = post.getContent();
             String dayBefore = getDayBefore(post);
+            String imageUrl = post.getImageUrl();
             int commentCnt = post.getComments().size();
             //String userImage =
             String userName = post.getUserName();
 
             PostingResponseDto responseDto =
                     new PostingResponseDto(postingId, userName, title, content,
-                                           imageFile, dayBefore, commentCnt);
+                                           imageFile, imageUrl, dayBefore, commentCnt);
             data.add(responseDto);
         }
 

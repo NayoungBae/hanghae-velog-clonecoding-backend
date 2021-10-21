@@ -82,7 +82,7 @@ public class PostingController {
             //테스트코드
             String username = "반환오류";
             if(userDetails == null){
-                username = "이게 반환되면 오류입니다";
+                username = "NotokenUser";
             }
             if(userDetails != null){
                 username = userDetails.getUser().getUserName();
