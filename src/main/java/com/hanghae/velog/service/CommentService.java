@@ -24,11 +24,11 @@ public class CommentService {
 
 
     @Transactional
-    public void createComment(CommentDto requestDto,Posting posting) {
+    public void createComment(CommentDto requestDto) {
 //        User user = userRepository.findByUserName(userDetails.getUser().getUserName()).orElseThrow(
 //                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
 //        );
-        Comment comment = new Comment(requestDto,posting);
+        Comment comment = new Comment(requestDto);
         Posting post = postRepository.findByPostingId(requestDto.getPostingId());
         commentRepository.save(comment);
         post.addComment(comment);
