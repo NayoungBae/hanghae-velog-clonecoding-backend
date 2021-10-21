@@ -1,4 +1,4 @@
-package com.hanghae.velog.domain;
+package com.hanghae.velog.model;
 
 import com.hanghae.velog.security.UserDetailsImpl;
 import lombok.AllArgsConstructor;
@@ -26,11 +26,14 @@ public class User {
     @Column(nullable = false)
     private String password;    //사용자 비밀번호
 
+    @Column(nullable = false)
+    private String ProfileImage;
 
-    public User(String userId, String password, String userName) {
+    public User(String userId, String password, String userName, String profileImage) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
+        this.ProfileImage = profileImage;
     }
 
 }

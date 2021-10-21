@@ -1,6 +1,5 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.domain.User;
 import com.hanghae.velog.dto.CommentDto;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
