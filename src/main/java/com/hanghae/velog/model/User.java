@@ -26,7 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;    //사용자 비밀번호
 
-    @Column(nullable = false)
+    @Column
     private String ProfileImage;
 
     public User(String userId, String password, String userName, String profileImage) {

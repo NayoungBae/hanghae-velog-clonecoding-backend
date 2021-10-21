@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="myselectshop@springboot-db.cnjcgago8zld.ap-northeast-2.rds.amazonaws.com" uuid="0c3186b0-9a68-4d6c-936c-d72fc258e271">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://springboot-db.cnjcgago8zld.ap-northeast-2.rds.amazonaws.com:3306/myselectshop</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="myblog@myblog-springboot.cygpz0tq8qh5.ap-northeast-2.rds.amazonaws.com" uuid="4381acc3-afa7-437f-b541-5cccca5c58fd">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://myblog-springboot.cygpz0tq8qh5.ap-northeast-2.rds.amazonaws.com:3306/myblog</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

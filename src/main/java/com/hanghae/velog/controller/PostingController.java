@@ -8,6 +8,7 @@ import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.dto.PostingResponseDto;
 import com.hanghae.velog.model.Posting;
+import com.hanghae.velog.repository.CommentRepository;
 import com.hanghae.velog.repository.PostingRepository;
 import com.hanghae.velog.repository.UserRepository;
 import com.hanghae.velog.security.UserDetailsImpl;
@@ -30,6 +31,7 @@ public class PostingController {
     private final UserRepository userRepository;
     private final PostingService postingService;
     private final PostingRepository postingRepository;
+    private final CommentRepository commentRepository;
 
     private String commonPath = "/images"; // 이경로는 우분투랑 윈도우랑 다르니까 주의해야댐 우분투 : "/"
     // 윈도우  : \\ 인것같음.
@@ -118,12 +120,14 @@ public class PostingController {
     @DeleteMapping("/api/posting/{posting-ID}")
     public MsgResponseDto deletePosts(@PathVariable("posting-ID") Long postingId, @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
-        //삭제할때 댓글들 자동으로삭제하는지 확인해야함..
+        //삭제할때 댓글들 자동으로삭제하는지 확인
+//        list test =commentRepository.findAllByPostingId(postingId);
         if(userDetails == null){
             throw new IllegalArgumentException("로그인 한 사용자만 삭제 명령을 시도할 수 있습니다.");
         }
         //삭제할때 같이 저장된 이미지 경로 및 파일도 삭제
         postingRepository.deleteById(postingId);
+//        commentRepository.deleteBy(test);
         MsgResponseDto msgResponseDto = new MsgResponseDto("삭제 성공");
         return msgResponseDto;
     }
