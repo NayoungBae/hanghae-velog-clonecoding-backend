@@ -1,6 +1,6 @@
 package com.hanghae.velog.model;
 
-import com.hanghae.velog.security.UserDetailsImpl;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
