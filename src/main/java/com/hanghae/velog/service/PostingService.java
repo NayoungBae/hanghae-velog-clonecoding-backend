@@ -59,12 +59,12 @@ public class PostingService {
 
         String title = posting.getTitle();
         String content = posting.getContent();
-        String imageFile = posting.getImageFile();
+        String filePath = posting.getFilePath();
         String modifiedAt = posting.getModifiedAt().toString();
         List<Comment> comments = posting.getComments();
 
         DetailResponseDto detailResponseDto = new DetailResponseDto(
-                postingId, title, content, imageFile, modifiedAt, comments
+                postingId, title, content, filePath, modifiedAt, comments
         );
 
         return detailResponseDto;
@@ -83,12 +83,12 @@ public class PostingService {
             String userName = post.getUserName();
             String title = post.getTitle();
             String content = post.getContent();
-            String imageFile = post.getImageFile();
+            String filePath = post.getFilePath();
             String dayBefore = getDayBefore(post);
             int commentCnt = post.getComments().size();
 
             PostingResponseDto responseDto =
-                    new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
+                    new PostingResponseDto(postingId, userName, title, content, filePath, dayBefore, commentCnt);
             data.add(responseDto);
         }
 
@@ -168,7 +168,7 @@ public class PostingService {
             Posting post = posts.get(i);
 
             Long postingId = post.getPostingId();
-            String imageFile = post.getImageFile();
+            String filePath = post.getFilePath();
             String title = post.getTitle();
             String content = post.getContent();
             String dayBefore = getDayBefore(post);
@@ -178,7 +178,7 @@ public class PostingService {
 
             PostingResponseDto responseDto =
                     new PostingResponseDto(postingId, userName, title, content,
-                                           imageFile, dayBefore, commentCnt);
+                                           filePath, dayBefore, commentCnt);
             data.add(responseDto);
         }
 

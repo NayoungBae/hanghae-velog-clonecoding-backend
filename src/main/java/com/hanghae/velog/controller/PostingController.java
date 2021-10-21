@@ -89,7 +89,7 @@ public class PostingController {
             }
 
 
-            requestDto.setImageFile(filename);
+            requestDto.setFilePath(filename);
 
             Posting posts = postingService.createPosting(requestDto,username);
 
