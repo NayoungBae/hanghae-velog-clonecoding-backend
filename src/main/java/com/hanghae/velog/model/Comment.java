@@ -28,14 +28,21 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private Long postingId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "postingId")
+
+//    @ManyToOne(fetch = FetchType.LAZY,cascade =CascadeType.ALL )
+//    @JoinColumn(name = "post_Id")
 //    private Posting post;
 
     public Comment(CommentDto reqDto,String userName) {
         this.userName = userName;
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
+    }
+    public Comment(CommentDto reqDto,Posting post) {
+        this.userName = reqDto.getUserName();
+        this.comment = reqDto.getComment();
+        this.postingId = reqDto.getPostingId();
+//        this.post = post;
     }
     public Comment(CommentDto reqDto) {
         this.userName = reqDto.getUserName();

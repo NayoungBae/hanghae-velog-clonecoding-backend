@@ -35,7 +35,7 @@ public class CommentController {
             @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         if (userDetails != null){
-            return msg+"에러";
+            requestDto.setUserName(userDetails.getUser().getUserName());
         }
         commentService.createComment(requestDto);
         return msg;

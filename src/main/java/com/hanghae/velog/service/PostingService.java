@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -120,6 +123,7 @@ public class PostingService {
 
         Date format1 = java.sql.Timestamp.valueOf(now);
         Date format2 = java.sql.Timestamp.valueOf(createdAt);
+
 
         // date.getTime() : Date를 밀리세컨드로 변환. 1초 = 1000밀리초
         Long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이

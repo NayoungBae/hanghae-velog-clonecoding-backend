@@ -1,5 +1,6 @@
 package com.hanghae.velog.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hanghae.velog.Util.MD5Generator;
 import com.hanghae.velog.model.User;
 import com.hanghae.velog.dto.LoginRequestDto;
@@ -7,12 +8,10 @@ import com.hanghae.velog.dto.LoginResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.SignupRequestDto;
 import com.hanghae.velog.security.JwtTokenProvider;
+//import com.hanghae.velog.service.KakaoUserService;
 import com.hanghae.velog.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -25,6 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
+//    private final KakaoUserService kakaoUserService;
 
     private String commonPath = "/Profileimages";
     //회원가입
@@ -53,11 +53,11 @@ public class UserController {
                 }
                 String filePath = savePath + "/" + filename;// 이경로는 우분투랑 윈도우랑 다르니까 주의해야댐 우분투 : / 윈도우 \\ 인것같음.
                 files.transferTo(new File(filePath));
-
+            }
                 signupRequestDto.setProfileImage(filename);
                 //유저가입
                 userService.signup(signupRequestDto);
-            }
+
         }catch(Exception e) {
             msgResponseDto = new MsgResponseDto(e.getMessage());
             return msgResponseDto;
@@ -104,4 +104,10 @@ public class UserController {
         return loginResponseDto;
     }
 
+
+//    @GetMapping("/user/kakao/callback")
+//    public String kakaoLogin(@RequestParam String code) throws JsonProcessingException {
+//        kakaoUserService.kakaoLogin(code);
+//        return "redirect:/";
+//    }
 }
