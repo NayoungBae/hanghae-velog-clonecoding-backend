@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -100,6 +101,22 @@ public class PostingService {
 
         String now = LocalDateTime.now().toString();
         String createdAt = posting.getCreatedAt().toString();
+        StringBuilder builder = new StringBuilder(now);
+        builder.deleteCharAt(10);
+        now = builder.toString();
+
+//        now.replaceAll("T", "");
+//        createdAt.replaceAll("T","");
+
+        System.out.println(now);
+        int a = now.indexOf("T");
+
+
+
+        System.out.println(a);
+
+        System.out.println(now);
+        System.out.println(createdAt);
 
         Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
         Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(createdAt);
