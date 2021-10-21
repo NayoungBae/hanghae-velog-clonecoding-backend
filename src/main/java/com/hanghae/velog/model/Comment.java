@@ -38,12 +38,12 @@ public class Comment extends Timestamped{
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
     }
-    public Comment(CommentDto reqDto,Posting post) {
-        this.userName = reqDto.getUserName();
-        this.comment = reqDto.getComment();
-        this.postingId = reqDto.getPostingId();
-//        this.post = post;
-    }
+//    public Comment(CommentDto reqDto,Posting post) {
+//        this.userName = reqDto.getUserName();
+//        this.comment = reqDto.getComment();
+//        this.postingId = reqDto.getPostingId();
+////        this.post = post;
+//    }
     public Comment(CommentDto reqDto) {
         this.userName = reqDto.getUserName();
         this.comment = reqDto.getComment();
