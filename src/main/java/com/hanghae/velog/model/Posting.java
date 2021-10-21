@@ -29,9 +29,9 @@ public class Posting extends Timestamped {
 
     @Column(nullable = false)
     private String content; // 게시글 내용
-
-    @Column(nullable = false)
-    private String contentTag;
+//
+//    @Column(nullable = false)
+//    private String contentTag;
 
 //    @Column(nullable = false)
 //    private Long dayBefore; // 게시글 등록 날짜(계산)
@@ -56,7 +56,7 @@ public class Posting extends Timestamped {
     public Posting(PostingRequestDto requestDto, String userName) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.contentTag = requestDto.getContentTag();
+//        this.contentTag = requestDto.getContentTag();
         this.imageFile = requestDto.getImageFile();
         this.userName = userName;
     }
@@ -65,7 +65,7 @@ public class Posting extends Timestamped {
     public void updatePosting(PostingRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
-        this.contentTag = requestDto.getContentTag();
+//        this.contentTag = requestDto.getContentTag();
         this.imageFile = requestDto.getImageFile();
     }
     // 개별 게시글 상세조회 페이지 생성자
