@@ -1,9 +1,6 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.dto.DetailResponseDto;
-import com.hanghae.velog.dto.MyPostingResponseDto;
-import com.hanghae.velog.dto.PostingRequestDto;
-import com.hanghae.velog.dto.GetMyPostsResponseDto;
+import com.hanghae.velog.dto.*;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
@@ -12,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -70,6 +70,69 @@ public class PostingService {
         return detailResponseDto;
     }
 
+    // 게시글 전체조회 메소드
+    public List<PostingResponseDto> getPostings() throws ParseException {
+        List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
+
+        List<PostingResponseDto> postingList = new ArrayList<>();
+
+        for(int i=0; i<postings.size(); i++) {
+            Posting post = postings.get(i);
+
+            Long postingId = post.getPostingId();
+            String userName = post.getUserName();
+            String title = post.getTitle();
+            String content = post.getContent();
+            String imageFile = post.getImageFile();
+            String dayBefore = getDayBefore(post);
+            int commentCnt = post.getComments().size();
+
+            PostingResponseDto responseDto =
+                    new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
+            postingList.add(responseDto);
+        }
+
+        return postingList;
+    }
+
+
+    public String getDayBefore(Posting posting) throws ParseException {
+
+        String now = LocalDateTime.now().toString();
+        String createdAt = posting.getCreatedAt().toString();
+
+        Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+        Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(createdAt);
+
+        // date.getTime() : Date를 밀리세컨드로 변환. 1초 = 1000밀리초
+        Long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이
+        Long diffMin = (format1.getTime() - format2.getTime()) / 60000; // 분 차이
+        Long diffHour = (format1.getTime() - format2.getTime()) / 3600000; // 시 차이, 24시까지 나옴
+        Long diffDays = diffSec / (24 * 60 * 60); // 일자수 차이 예:7일, 6일
+
+        //DayBefore 계산
+        // 초 차이가 60초 미만일 때 -> return 초 차이
+        // 초 차이가 60초 이상, 분 차이가 60분 미만일 때 -> return 분 차이
+        // 분 차이가 60분 이상, 시 차이가 24 미만일 때 -> return 시 차이
+        // 시 차이가 24 이상, 일 차이가 7일 미만일 때 -> return 일자수 차이
+        // 일 차이가 7일 이상일 때 -> return createdAt의 년, 월, 일까지
+
+        String dayBefore = "";
+
+        if(diffSec < 60) {
+            dayBefore = diffSec.toString();
+        } else if(diffSec >= 60 && diffMin < 60) {
+            dayBefore = diffMin.toString();
+        } else if(diffMin >= 60 && diffHour < 24) {
+            dayBefore = diffHour.toString();
+        } else if(diffHour >= 24 && diffDays < 7) {
+            dayBefore = diffDays.toString();
+        } else if (diffDays > 7) {
+            dayBefore = format2.toString();
+        }
+        return dayBefore;
+    }
+
     //내가 작성한 게시글 목록 조회
     public GetMyPostsResponseDto getMyPosts(UserDetailsImpl userDetails) {
         String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
@@ -99,7 +162,7 @@ public class PostingService {
 
             MyPostingResponseDto posting =
                     new MyPostingResponseDto(postingId, thumbNail, title, content,
-                                             dayBefore, commentCnt, userName);
+                            dayBefore, commentCnt, userName);
             data.add(posting);
         }
 
@@ -107,20 +170,5 @@ public class PostingService {
 
         return getMyPostsResponseDto;
     }
-
-
-//    public Posting getDayBefore(Posting posting) {
-//        LocalDate now = LocalDate.now(); // 2021-10-19
-//        int year = now.getYear(); // 2021
-//        int monthValue = now.getMonthValue(); // 10
-//        int dayofMonth = now.getDayOfMonth(); // 19
-//
-//        LocalDateTime CreatedAt = posting.getCreatedAt();
-//
-//        if ()
-//
-//        //DayBefore 계산
-//        int DayBefore
-//    }
 
 }

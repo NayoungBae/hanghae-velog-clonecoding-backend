@@ -5,6 +5,7 @@ import com.hanghae.velog.dto.DetailResponseDto;
 import com.hanghae.velog.dto.GetMyPostsResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
+import com.hanghae.velog.dto.PostingResponseDto;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
 import com.hanghae.velog.repository.UserRepository;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
+import java.text.ParseException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,10 +36,11 @@ public class PostingController {
 
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
-    public List<Posting> getPostings() {
-        List<Posting> postingList = postingRepository.findAll();
-        return postingList;
-    }
+    public List<PostingResponseDto> getPosts() throws ParseException {
+        List<PostingResponseDto> allpostings = postingService.getPostings();
+        return allpostings;
+        }
+
 
     // 게시글 상세조회
     @GetMapping("/api/posting/{posting-ID}")
