@@ -1,6 +1,7 @@
 package com.hanghae.velog.controller;
 
-import com.hanghae.velog.domain.User;
+import com.hanghae.velog.Util.MD5Generator;
+import com.hanghae.velog.model.User;
 import com.hanghae.velog.dto.LoginRequestDto;
 import com.hanghae.velog.dto.LoginResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
@@ -8,13 +9,15 @@ import com.hanghae.velog.dto.SignupRequestDto;
 import com.hanghae.velog.security.JwtTokenProvider;
 import com.hanghae.velog.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 @RequiredArgsConstructor
 @RestController     //return값이 html 파일이름이 아닌 이상 바꾸면 안됩니다
@@ -23,13 +26,39 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
+    private String commonPath = "/Profileimages";
     //회원가입
     @PostMapping("/user/signup")
-    public MsgResponseDto signup(@RequestBody SignupRequestDto signupRequestDto) {
+    public MsgResponseDto signup(
+            @RequestParam(value = "file",required = false) MultipartFile files,
+            @RequestBody SignupRequestDto signupRequestDto) {
+
         MsgResponseDto msgResponseDto = null;
         try {
-            userService.signup(signupRequestDto);
-        } catch(Exception e) {
+            String filename = "basic_profile.jpg";
+            if (files != null) {
+                String origFilename = files.getOriginalFilename();
+                filename = new MD5Generator(origFilename).toString() + ".jpg";
+                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+
+                String savePath = System.getProperty("user.dir") + commonPath;
+                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+                //files.part.getcontententtype() 해서 이미지가 아니면 false처리해야함.
+                if (!new File(savePath).exists()) {
+                    try {
+                        new File(savePath).mkdir();
+                    } catch (Exception e) {
+                        e.getStackTrace();
+                    }
+                }
+                String filePath = savePath + "/" + filename;// 이경로는 우분투랑 윈도우랑 다르니까 주의해야댐 우분투 : / 윈도우 \\ 인것같음.
+                files.transferTo(new File(filePath));
+
+                signupRequestDto.setProfileImage(filename);
+                //유저가입
+                userService.signup(signupRequestDto);
+            }
+        }catch(Exception e) {
             msgResponseDto = new MsgResponseDto(e.getMessage());
             return msgResponseDto;
         }

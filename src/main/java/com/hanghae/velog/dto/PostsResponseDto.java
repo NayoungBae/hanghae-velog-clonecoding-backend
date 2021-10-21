@@ -9,6 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class GetMyPostsResponseDto {
-    List<MyPostingResponseDto> data;
+public class PostsResponseDto {
+    List<PostingResponseDto> data;
 }

@@ -1,11 +1,9 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.domain.User;
+import com.hanghae.velog.model.User;
 import com.hanghae.velog.dto.LoginRequestDto;
-import com.hanghae.velog.dto.LoginResponseDto;
 import com.hanghae.velog.dto.SignupRequestDto;
 import com.hanghae.velog.repository.UserRepository;
-import com.hanghae.velog.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class UserServiceImpl implements UserService{
         String userId = signupRequestDto.getUserId();   //아이디:이메일형식
         String password = signupRequestDto.getPassword();   //비밀번호(유효성 검사 위해 암호화 X)
         String userName = signupRequestDto.getUserName();   //닉네임
-
+        String profileimage = signupRequestDto.getProfileImage();
         //아이디 중복검사
         isValidUserId(userId);
         //비밀번호 유효성 검사
@@ -37,7 +35,7 @@ public class UserServiceImpl implements UserService{
 
         password = passwordEncoder.encode(password);    //암호화한 비밀번호
 
-        User user = new User(userId, password, userName);
+        User user = new User(userId, password, userName, profileimage);
         return userRepository.save(user);
     }
 

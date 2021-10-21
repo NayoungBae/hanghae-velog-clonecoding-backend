@@ -1,6 +1,6 @@
 package com.hanghae.velog.security;
 
-import com.hanghae.velog.domain.User;
+import com.hanghae.velog.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

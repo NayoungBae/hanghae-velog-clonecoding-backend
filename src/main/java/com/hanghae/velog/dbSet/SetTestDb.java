@@ -33,12 +33,14 @@ public class SetTestDb {
         user.setUserId("bbb@bbb.com");
         user.setUserName("bbb");
         user.setPassword("abab1234");
+        user.setProfileImage("/Profileimages/basic_profile");
         userService.signup(user);
 
         SignupRequestDto user2 = new SignupRequestDto();
         user2.setUserId("aaa@aaa.com");
         user2.setUserName("aaa");
         user2.setPassword("abab1234");
+        user2.setProfileImage("/Profileimages/basic_profile");
         userService.signup(user2);
     }
 
@@ -99,7 +101,7 @@ public class SetTestDb {
         reqdto9.setContent("내용");
         reqdto9.setContentTag("테스트");
         reqdto9.setImageFile("/images/basic.jpg");
-        postService.createPosting(reqdto9,"bbb");
+        postService.createPosting(reqdto9,"aaa");
         PostingRequestDto reqdto10 = new PostingRequestDto();
         reqdto10.setTitle("제목10");
         reqdto10.setContent("내용");

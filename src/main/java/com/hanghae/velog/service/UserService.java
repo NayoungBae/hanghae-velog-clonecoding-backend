@@ -1,8 +1,7 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.domain.User;
+import com.hanghae.velog.model.User;
 import com.hanghae.velog.dto.LoginRequestDto;
-import com.hanghae.velog.dto.LoginResponseDto;
 import com.hanghae.velog.dto.SignupRequestDto;
 
 public interface UserService {
