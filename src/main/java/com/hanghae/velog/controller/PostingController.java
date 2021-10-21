@@ -1,11 +1,7 @@
 package com.hanghae.velog.controller;
 
 import com.hanghae.velog.Util.MD5Generator;
-import com.hanghae.velog.dto.DetailResponseDto;
-import com.hanghae.velog.dto.GetMyPostsResponseDto;
-import com.hanghae.velog.dto.MsgResponseDto;
-import com.hanghae.velog.dto.PostingRequestDto;
-import com.hanghae.velog.dto.PostingResponseDto;
+import com.hanghae.velog.dto.*;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.PostingRepository;
 import com.hanghae.velog.repository.UserRepository;
@@ -36,8 +32,8 @@ public class PostingController {
 
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
-    public List<PostingResponseDto> getPosts() throws ParseException {
-        List<PostingResponseDto> allpostings = postingService.getPostings();
+    public PostingListResponseDto getPosts() throws ParseException {
+        PostingListResponseDto allpostings = postingService.getPostings();
         return allpostings;
         }
 

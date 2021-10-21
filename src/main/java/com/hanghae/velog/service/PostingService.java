@@ -74,10 +74,10 @@ public class PostingService {
     }
 
     // 게시글 전체조회 메소드
-    public List<PostingResponseDto> getPostings() throws ParseException {
+    public PostingListResponseDto getPostings() throws ParseException {
         List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
 
-        List<PostingResponseDto> postingList = new ArrayList<>();
+        List<PostingResponseDto> data = new ArrayList<>();
 
         for(int i=0; i<postings.size(); i++) {
             Posting post = postings.get(i);
@@ -92,10 +92,12 @@ public class PostingService {
 
             PostingResponseDto responseDto =
                     new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
-            postingList.add(responseDto);
+            data.add(responseDto);
         }
 
-        return postingList;
+        PostingListResponseDto postingListResponseDto = new PostingListResponseDto(data);
+
+        return postingListResponseDto;
     }
 
 
