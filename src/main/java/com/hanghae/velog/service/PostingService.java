@@ -12,12 +12,13 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Locale.KOREA;
 
 @RequiredArgsConstructor
 @Service
@@ -98,28 +99,13 @@ public class PostingService {
 
 
     public String getDayBefore(Posting posting) throws ParseException {
+        //LocalDateTime -> Date으로 변환
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime createdAt = posting.getCreatedAt();
+        
+        Date format1 = java.sql.Timestamp.valueOf(now);
+        Date format2 = java.sql.Timestamp.valueOf(createdAt);
 
-        String now = LocalDateTime.now().toString();
-        String createdAt = posting.getCreatedAt().toString();
-        StringBuilder builder = new StringBuilder(now);
-        builder.deleteCharAt(10);
-        now = builder.toString();
-
-//        now.replaceAll("T", "");
-//        createdAt.replaceAll("T","");
-
-        System.out.println(now);
-        int a = now.indexOf("T");
-
-
-
-        System.out.println(a);
-
-        System.out.println(now);
-        System.out.println(createdAt);
-
-        Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
-        Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(createdAt);
 
         // date.getTime() : Date를 밀리세컨드로 변환. 1초 = 1000밀리초
         Long diffSec = (format1.getTime() - format2.getTime()) / 1000; // 초 차이
@@ -137,13 +123,17 @@ public class PostingService {
         String dayBefore = "";
 
         if(diffSec < 60) {
-            dayBefore = diffSec.toString();
+            String secstr = diffSec.toString();
+            dayBefore = secstr + "초 전";
         } else if(diffSec >= 60 && diffMin < 60) {
-            dayBefore = diffMin.toString();
+            String minstr = diffMin.toString();
+            dayBefore = minstr + "분 전";
         } else if(diffMin >= 60 && diffHour < 24) {
-            dayBefore = diffHour.toString();
+            String hourstr = diffHour.toString();
+            dayBefore = hourstr + "시 전";
         } else if(diffHour >= 24 && diffDays < 7) {
-            dayBefore = diffDays.toString();
+            String daystr = diffDays.toString();
+            dayBefore = daystr + "일 전";
         } else if (diffDays > 7) {
             dayBefore = format2.toString();
         }
