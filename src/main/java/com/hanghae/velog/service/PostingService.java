@@ -12,13 +12,11 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+
 import java.util.Date;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Locale.KOREA;
 
 @RequiredArgsConstructor
 @Service
@@ -73,10 +71,10 @@ public class PostingService {
     }
 
     // 게시글 전체조회 메소드
-    public List<PostingResponseDto> getPostings() throws ParseException {
+    public PostingListResponseDto getPostings() throws ParseException {
         List<Posting> postings = postingRepository.findAllByOrderByCreatedAtDesc();
 
-        List<PostingResponseDto> postingList = new ArrayList<>();
+        List<PostingResponseDto> data = new ArrayList<>();
 
         for(int i=0; i<postings.size(); i++) {
             Posting post = postings.get(i);
@@ -91,18 +89,38 @@ public class PostingService {
 
             PostingResponseDto responseDto =
                     new PostingResponseDto(postingId, userName, title, content, imageFile, dayBefore, commentCnt);
-            postingList.add(responseDto);
+            data.add(responseDto);
         }
 
-        return postingList;
+        PostingListResponseDto postingListResponseDto = new PostingListResponseDto(data);
+
+        return postingListResponseDto;
     }
 
+    //내가 작성한 게시글 목록 조회
+    public PostsResponseDto getMyPosts(UserDetailsImpl userDetails) throws ParseException {
+        String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
 
+        PostsResponseDto postsResponseDto = getPosts(loginedUserName);
+
+        return postsResponseDto;
+    }
+
+    //특정 유저 게시글 조회
+    public PostsResponseDto getUserPosts(String currentUserName) throws ParseException {
+
+        PostsResponseDto postsResponseDto = getPosts(currentUserName);
+
+        return postsResponseDto;
+    }
+
+    //게시한 날짜부터 얼마나 되었는 지 계산
     public String getDayBefore(Posting posting) throws ParseException {
+
         //LocalDateTime -> Date으로 변환
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime createdAt = posting.getCreatedAt();
-        
+
         Date format1 = java.sql.Timestamp.valueOf(now);
         Date format2 = java.sql.Timestamp.valueOf(createdAt);
 
@@ -140,42 +158,33 @@ public class PostingService {
         return dayBefore;
     }
 
-    //내가 작성한 게시글 목록 조회
-    public GetMyPostsResponseDto getMyPosts(UserDetailsImpl userDetails) {
-        String loginedUserName = userDetails.getUsername();    //현재 로그인한 닉네임
+    //특정 닉네임을 가진 계정이 쓴 게시글 조회
+    private PostsResponseDto getPosts(String currentUserName) throws ParseException {
+        List<Posting> posts = postingRepository.findByUserNameOrderByCreatedAtDesc(currentUserName);
 
-        List<Posting> posts = postingRepository.findByUserName(loginedUserName);     //로그인한 사용자가 작성한 글 목록 조회
+        List<PostingResponseDto> data = new ArrayList<>();
 
-        List<MyPostingResponseDto> data = new ArrayList<>();
-
-        for(int i=0; i<posts.size(); i++) {
+        for (int i = 0; i < posts.size(); i++) {
             Posting post = posts.get(i);
 
             Long postingId = post.getPostingId();
-            String thumbNail = post.getImageFile();
+            String imageFile = post.getImageFile();
             String title = post.getTitle();
             String content = post.getContent();
-
-            //날짜 차이 계산
-            LocalDate currentDate = LocalDateTime.now().toLocalDate();
-            LocalDate createdAt = post.getCreatedAt().toLocalDate();
-            Period period = Period.between(createdAt, currentDate);
-
-            String dayBefore = Long.toString(period.getDays()) + "일 전";
-
+            String dayBefore = getDayBefore(post);
             int commentCnt = post.getComments().size();
             //String userImage =
             String userName = post.getUserName();
 
-            MyPostingResponseDto posting =
-                    new MyPostingResponseDto(postingId, thumbNail, title, content,
-                            dayBefore, commentCnt, userName);
-            data.add(posting);
+            PostingResponseDto responseDto =
+                    new PostingResponseDto(postingId, userName, title, content,
+                                           imageFile, dayBefore, commentCnt);
+            data.add(responseDto);
         }
 
-        GetMyPostsResponseDto getMyPostsResponseDto = new GetMyPostsResponseDto(data);
+        PostsResponseDto postsResponseDto = new PostsResponseDto(data);
 
-        return getMyPostsResponseDto;
+        return postsResponseDto;
     }
 
 }

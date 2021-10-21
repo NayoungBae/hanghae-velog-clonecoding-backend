@@ -1,8 +1,9 @@
 package com.hanghae.velog.controller;
 
 import com.hanghae.velog.Util.MD5Generator;
+import com.hanghae.velog.dto.*;
 import com.hanghae.velog.dto.DetailResponseDto;
-import com.hanghae.velog.dto.GetMyPostsResponseDto;
+import com.hanghae.velog.dto.PostsResponseDto;
 import com.hanghae.velog.dto.MsgResponseDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.dto.PostingResponseDto;
@@ -17,7 +18,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.text.ParseException;
 import java.util.List;
@@ -36,8 +36,8 @@ public class PostingController {
 
     //메인페이지 게시글 전체 조회
     @GetMapping("/api/posting")
-    public List<PostingResponseDto> getPosts() throws ParseException {
-        List<PostingResponseDto> allpostings = postingService.getPostings();
+    public PostingListResponseDto getPosts() throws ParseException {
+        PostingListResponseDto allpostings = postingService.getPostings();
         return allpostings;
         }
 
@@ -130,8 +130,15 @@ public class PostingController {
 
     //내가 작성한 게시글 목록 조회
     @GetMapping("/api/mypage")
-    public GetMyPostsResponseDto getMyPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        GetMyPostsResponseDto postingList = postingService.getMyPosts(userDetails);
+    public PostsResponseDto getMyPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) throws ParseException {
+        PostsResponseDto postingList = postingService.getMyPosts(userDetails);
+        return postingList;
+    }
+
+    //특정 유저 게시글 조회
+    @GetMapping("/api/userpage/{userName}")
+    public PostsResponseDto getUserPosts(@PathVariable String userName) throws ParseException {
+        PostsResponseDto postingList = postingService.getUserPosts(userName);
         return postingList;
     }
 
