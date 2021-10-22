@@ -4,13 +4,13 @@ https://www.youtube.com/watch?v=Swe7n9nAzQM
 <img src="https://user-images.githubusercontent.com/44156173/138483530-73d92319-6c9a-4617-bf59-e5ba66b4765b.png" width="700" height="400">
 
 ## 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
-- Front-end (React) (https://github.com/spacejay1007/velogclone-FE)
-    - 김재용 👨 (https://github.com/spacejay1007)
-    - 김효진 🧔 (https://github.com/hyojin-k)
-- Back-end (Spring) (https://github.com/NayoungBae/hanghae-velog-clonecoding-backend)
-    - 정영호 🧑 (https://github.com/slsnrnsep)
-    - 배나영 👧 (https://github.com/NayoungBae)
-    - 정희윤 👧 (https://github.com/codenamehee)
+- [Front-end (React)](https://github.com/spacejay1007/velogclone-FE)
+    - [김재용](https://github.com/spacejay1007) 👨 
+    - [김효진](https://github.com/hyojin-k) 🧔 
+- [Back-end (Spring)](https://github.com/NayoungBae/hanghae-velog-clonecoding-backend)
+    - [정영호](https://github.com/slsnrnsep) 🧑 
+    - [배나영](https://github.com/NayoungBae) 👧 
+    - [정희윤](https://github.com/codenamehee) 👧 
 
 ## 3. 사용 기술 🔧 ⚙️
 - Language : **`Java 8`**
