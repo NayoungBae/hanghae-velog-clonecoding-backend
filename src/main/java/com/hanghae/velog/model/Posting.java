@@ -45,7 +45,7 @@ public class Posting extends Timestamped {
 //    @Column(nullable = false)
 //    private String userImage; // 게시글 작성자의 프로필 사진
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public void addComment(Comment comment) {

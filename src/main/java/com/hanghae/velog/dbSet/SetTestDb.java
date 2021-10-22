@@ -1,6 +1,6 @@
 package com.hanghae.velog.dbSet;
 
-import com.hanghae.velog.dto.CommentDto;
+import com.hanghae.velog.dto.CommentRequestDto;
 import com.hanghae.velog.dto.PostingRequestDto;
 import com.hanghae.velog.dto.SignupRequestDto;
 import com.hanghae.velog.service.CommentService;
@@ -113,32 +113,32 @@ public class SetTestDb {
     @Transactional
     public void commentSet()
     {
-        CommentDto com1 = new CommentDto();
+        CommentRequestDto com1 = new CommentRequestDto();
         com1.setComment("내용1");
         com1.setUserName("bbb");
         com1.setPostingId(3L);
         commentService.createComment(com1);
-        CommentDto com2 = new CommentDto();
+        CommentRequestDto com2 = new CommentRequestDto();
         com2.setComment("내용2");
         com2.setUserName("bbb");
         com2.setPostingId(3L);
         commentService.createComment(com2);
-        CommentDto com3 = new CommentDto();
+        CommentRequestDto com3 = new CommentRequestDto();
         com3.setComment("내용3");
         com3.setUserName("bbb");
         com3.setPostingId(3L);
         commentService.createComment(com3);
-        CommentDto com4 = new CommentDto();
+        CommentRequestDto com4 = new CommentRequestDto();
         com4.setComment("내용4");
         com4.setUserName("aaa");
         com4.setPostingId(3L);
         commentService.createComment(com4);
-        CommentDto com5 = new CommentDto();
+        CommentRequestDto com5 = new CommentRequestDto();
         com5.setComment("내용5");
         com5.setUserName("aaa");
         com5.setPostingId(3L);
         commentService.createComment(com5);
-        CommentDto com6 = new CommentDto();
+        CommentRequestDto com6 = new CommentRequestDto();
         com6.setComment("내용6");
         com6.setUserName("aaa");
         com6.setPostingId(3L);

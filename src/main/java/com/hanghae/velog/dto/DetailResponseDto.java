@@ -14,7 +14,7 @@ public class DetailResponseDto {
     private Long postingId;
     private String title;
     private String content;
-    private String imageFile;
+    private String filePath;
     private String modifiedAt;
-    private List<Comment> comments;
+    private List<CommentResponseDto> commentList;
 }

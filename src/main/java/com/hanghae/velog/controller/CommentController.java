@@ -1,7 +1,7 @@
 package com.hanghae.velog.controller;
 
 
-import com.hanghae.velog.dto.CommentDto;
+import com.hanghae.velog.dto.CommentRequestDto;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.repository.CommentRepository;
 import com.hanghae.velog.security.UserDetailsImpl;
@@ -31,7 +31,7 @@ public class CommentController {
     //토큰 받아와서 유저정보추가하기
     @PostMapping("/api/comment")
     public String createComment(
-            @RequestBody CommentDto requestDto,
+            @RequestBody CommentRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         if (userDetails != null){
@@ -44,7 +44,7 @@ public class CommentController {
     @PutMapping("/api/comment/{id}")
     public String editComment(
             @PathVariable Long id,
-            @RequestBody CommentDto requestDto,
+            @RequestBody CommentRequestDto requestDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         commentService.editComment(id,requestDto,userDetails);
