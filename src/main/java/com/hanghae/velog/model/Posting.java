@@ -60,6 +60,7 @@ public class Posting extends Timestamped {
         this.content = requestDto.getContent();
 //        this.contentTag = requestDto.getContentTag();
         this.filePath = requestDto.getFilePath();
+        this.imageUrl = requestDto.getImageUrl();
         this.userName = userName;
     }
 
