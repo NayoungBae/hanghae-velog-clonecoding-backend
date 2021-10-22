@@ -1,5 +1,7 @@
 ## ❤️10조❤️만의 Velog
-## 1. 시연영상
+## 1. 시연영상   
+https://www.youtube.com/watch?v=Swe7n9nAzQM   
+<img src="https://user-images.githubusercontent.com/44156173/138483530-73d92319-6c9a-4617-bf59-e5ba66b4765b.png" width="700" height="400">
 
 ## 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
 - Front-end (React)
