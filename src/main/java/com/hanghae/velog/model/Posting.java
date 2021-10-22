@@ -40,13 +40,15 @@ public class Posting extends Timestamped {
 //    private Long commentCnt; // 게시글에 등록된 댓글 갯수
 
     @Column(nullable = false)
-    private String imageFile; // 메인페이지에서 보여질 게시글의 썸네일 이미지(유저가 게시글에 등록한 이미지)
+    private String filePath; // 메인페이지에서 보여질 게시글의 썸네일 이미지(유저가 게시글에 등록한 이미지)
 
     @Column
     private String imageUrl; // 추가됨
 
 //    @Column(nullable = false)
 //    private String userImage; // 게시글 작성자의 프로필 사진
+    @Column
+    private String imageUrl;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
@@ -60,7 +62,7 @@ public class Posting extends Timestamped {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
 //        this.contentTag = requestDto.getContentTag();
-        this.imageFile = requestDto.getImageFile();
+        this.filePath = requestDto.getFilePath();
         this.userName = userName;
         this.imageUrl = requestDto.getImageUrl(); // 추가됨
     }
@@ -70,7 +72,8 @@ public class Posting extends Timestamped {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
 //        this.contentTag = requestDto.getContentTag();
-        this.imageFile = requestDto.getImageFile();
+        this.filePath = requestDto.getFilePath();
+        this.imageUrl = requestDto.getImageUrl(); // 추가됨
     }
     // 개별 게시글 상세조회 페이지 생성자
 
