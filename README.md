@@ -1,12 +1,7 @@
 ## ❤️10조❤️만의 Velog
 ## 1. 시연영상
 
----
-
 ## 2. 제작기간 & 팀원소개 🏃‍🏃‍♀️ 💨
-
----
-
 - Front-end (React)
     - 김재용 👨
     - 김효진 🧔
@@ -16,9 +11,6 @@
     - 정희윤 👧
 
 ## 3. 사용 기술 🔧 ⚙️
-
----
-
 - Language : **`Java 8`**
 - Tool : **`Intellij`**
 - Infrastructure : **`AWS RDS - MySQL`, `Aws EC2`**
@@ -26,13 +18,8 @@
 - Other Tools : **`Git`, `Github`, `notion`**
 
 ## 4. 구현 기능 📃
-
----
-
 - 로그인(JWT Token 인증) & 회원가입 🔓
 - 게시글 CR(UD)
 - 댓글 CR(UD)
 
 ## 5. 개인 회고
-
----
