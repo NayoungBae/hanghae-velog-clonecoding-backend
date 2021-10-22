@@ -50,6 +50,7 @@ public class Posting extends Timestamped {
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    //테스트
     public void addComment(Comment comment) {
         this.comments.add(comment);
         return;
