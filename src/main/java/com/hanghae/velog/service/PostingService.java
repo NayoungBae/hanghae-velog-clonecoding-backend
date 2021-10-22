@@ -54,18 +54,36 @@ public class PostingService {
 
     }
 
-    public DetailResponseDto getPostingDetail(Long postingId) {
-        Posting posting = postingRepository.findByPostingId(postingId);
+    public DetailResponseDto getPostingDetail(Long id) {
+        Posting posting = postingRepository.findByPostingId(id);
 
         String title = posting.getTitle();
         String content = posting.getContent();
         String filePath = posting.getFilePath();
         String modifiedAt = posting.getModifiedAt().toString();
+
+        List<CommentResponseDto> commentList = new ArrayList<>();
+
         List<Comment> comments = posting.getComments();
 
-        DetailResponseDto detailResponseDto = new DetailResponseDto(
-                postingId, title, content, filePath, modifiedAt, comments
-        );
+        for(Comment com: comments) {
+            Long postingId = com.getPostingId();
+            Long commentId = com.getId();
+            String userName = com.getUserName();
+            String comment = com.getComment();
+//            Long userIndex =    //...??
+            LocalDateTime createdAtComment = com.getCreatedAt();
+            LocalDateTime modifiedAtComment = com.getModifiedAt();
+
+            CommentResponseDto commentResponseDto =
+                    new CommentResponseDto(postingId, commentId, userName,
+                                            comment, createdAtComment, modifiedAtComment);
+
+            commentList.add(commentResponseDto);
+        }
+
+        DetailResponseDto detailResponseDto =
+                new DetailResponseDto(id, title, content, filePath, modifiedAt, commentList);
 
         return detailResponseDto;
     }

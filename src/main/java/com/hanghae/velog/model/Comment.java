@@ -1,14 +1,11 @@
 package com.hanghae.velog.model;
 
-import com.hanghae.velog.dto.CommentDto;
-import com.sun.istack.NotNull;
+import com.hanghae.velog.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Setter
 @Getter // get 함수를 일괄적으로 만들어줍니다.
@@ -29,27 +26,30 @@ public class Comment extends Timestamped{
     private Long postingId;
 
 
-//    @ManyToOne(fetch = FetchType.LAZY,cascade =CascadeType.ALL )
-//    @JoinColumn(name = "post_Id")
-//    private Posting post;
+    @ManyToOne(fetch = FetchType.LAZY,cascade =CascadeType.ALL )
+    @JoinColumn(name = "postId")
+    private Posting post;
 
-    public Comment(CommentDto reqDto,String userName) {
+    public Comment(CommentRequestDto reqDto, String userName) {
         this.userName = userName;
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
     }
-//    public Comment(CommentDto reqDto,Posting post) {
-//        this.userName = reqDto.getUserName();
-//        this.comment = reqDto.getComment();
-//        this.postingId = reqDto.getPostingId();
-////        this.post = post;
-//    }
-    public Comment(CommentDto reqDto) {
+
+    public Comment(CommentRequestDto reqDto,Posting post) {
+        this.userName = reqDto.getUserName();
+        this.comment = reqDto.getComment();
+        this.postingId = reqDto.getPostingId();
+        this.post = post;
+    }
+
+    public Comment(CommentRequestDto reqDto) {
         this.userName = reqDto.getUserName();
         this.comment = reqDto.getComment();
         this.postingId = reqDto.getPostingId();
     }
-    public void update(CommentDto reqDto) {
+
+    public void update(CommentRequestDto reqDto) {
         this.comment = reqDto.getComment();
     }
 }
