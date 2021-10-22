@@ -46,7 +46,7 @@ public class PostingController {
 
     // 게시글 상세조회
     @GetMapping("/api/posting/{posting-ID}")
-    public DetailResponseDto getPostingDetail(@PathVariable("posting-ID") Long postingId) {
+    public DetailResponseDto getPostingDetail(@PathVariable("posting-ID") Long postingId) throws ParseException {
         DetailResponseDto detailResponseDto = postingService.getPostingDetail(postingId);
         return detailResponseDto;
     }

@@ -15,6 +15,7 @@ public class DetailResponseDto {
     private String title;
     private String content;
     private String filePath;
-    private String modifiedAt;
+    private String imageUrl;
+    private String dayBefore;
     private List<CommentResponseDto> commentList;
 }

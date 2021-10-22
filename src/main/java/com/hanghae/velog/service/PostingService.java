@@ -54,14 +54,14 @@ public class PostingService {
 
     }
 
-    public DetailResponseDto getPostingDetail(Long id) {
+    public DetailResponseDto getPostingDetail(Long id) throws ParseException {
         Posting posting = postingRepository.findByPostingId(id);
 
         String title = posting.getTitle();
         String content = posting.getContent();
         String filePath = posting.getFilePath();
-        String modifiedAt = posting.getModifiedAt().toString();
-
+        String imageUrl = posting.getImageUrl();
+        String dayBefore = getDayBefore(posting);
         List<CommentResponseDto> commentList = new ArrayList<>();
 
         List<Comment> comments = posting.getComments();
@@ -83,7 +83,7 @@ public class PostingService {
         }
 
         DetailResponseDto detailResponseDto =
-                new DetailResponseDto(id, title, content, filePath, modifiedAt, commentList);
+                new DetailResponseDto(id, title, content, filePath, imageUrl,dayBefore, commentList);
 
         return detailResponseDto;
     }
