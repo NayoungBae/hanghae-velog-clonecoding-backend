@@ -62,6 +62,7 @@ public class PostingService {
         String filePath = posting.getFilePath();
         String imageUrl = posting.getImageUrl();
         String dayBefore = getDayBefore(posting);
+
         List<CommentResponseDto> commentList = new ArrayList<>();
 
         List<Comment> comments = posting.getComments();
@@ -107,7 +108,7 @@ public class PostingService {
             int commentCnt = post.getComments().size();
 
             PostingResponseDto responseDto =
-                    new PostingResponseDto(postingId, userName,imageUrl, title, content, filePath, dayBefore, commentCnt);
+                    new PostingResponseDto(postingId, userName, title, content, filePath,imageUrl, dayBefore, commentCnt);
             data.add(responseDto);
         }
 
