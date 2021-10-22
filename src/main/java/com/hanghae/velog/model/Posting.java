@@ -50,7 +50,7 @@ public class Posting extends Timestamped {
     @Column
     private String imageUrl;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public void addComment(Comment comment) {

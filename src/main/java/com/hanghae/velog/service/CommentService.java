@@ -1,6 +1,6 @@
 package com.hanghae.velog.service;
 
-import com.hanghae.velog.dto.CommentDto;
+import com.hanghae.velog.dto.CommentRequestDto;
 import com.hanghae.velog.model.Comment;
 import com.hanghae.velog.model.Posting;
 import com.hanghae.velog.repository.CommentRepository;
@@ -24,19 +24,19 @@ public class CommentService {
 
 
     @Transactional
-    public void createComment(CommentDto requestDto) {
+    public void createComment(CommentRequestDto requestDto) {
 //        User user = userRepository.findByUserName(userDetails.getUser().getUserName()).orElseThrow(
 //                () -> new IllegalArgumentException("로그인 정보를 불러올 수 없습니다.")
 //        );
-        Comment comment = new Comment(requestDto);
         Posting post = postRepository.findByPostingId(requestDto.getPostingId());
+        Comment comment = new Comment(requestDto, post);
         commentRepository.save(comment);
-        post.addComment(comment);
-        postRepository.save(post);
+        //post.addComment(comment);
+        //postRepository.save(post);
     }
 
     @Transactional
-    public void editComment(Long id, CommentDto requestDto, UserDetailsImpl userDetails) {
+    public void editComment(Long id, CommentRequestDto requestDto, UserDetailsImpl userDetails) {
         Comment comment = commentRepository.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("존재하지 않습니다.")
         );

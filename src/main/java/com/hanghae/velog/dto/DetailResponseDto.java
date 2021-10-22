@@ -16,5 +16,5 @@ public class DetailResponseDto {
     private String content;
     private String filePath;
     private String modifiedAt;
-    private List<Comment> comments;
+    private List<CommentResponseDto> commentList;
 }
